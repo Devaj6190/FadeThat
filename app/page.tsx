@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Nav from "@/components/Nav";
+import MissionStrip from "@/components/MissionStrip";
 import InputSection from "@/components/InputSection";
 import ResultsSection from "@/components/ResultsSection";
+import LoadingScreen from "@/components/LoadingScreen";
 import type { Claim } from "@/lib/types";
 
 type AppState = "idle" | "loading" | "results" | "error";
@@ -74,33 +77,28 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const isLoading = appState === "loading";
   const showError = appState === "error" ? error : null;
 
   return (
-    <main className="max-w-[760px] mx-auto px-6 py-12">
-      <header className="mb-10">
-        <h1 className="text-[28px] font-bold tracking-[-0.5px]">
-          Fade<span className="text-[#6b7aff]">That</span>
-        </h1>
-        <p className="mt-1.5 text-[#888] text-[14px]">
-          Paste an article or URL and we&apos;ll rank every claim by how wrong it is.
-        </p>
-      </header>
+    <>
+      <Nav onReset={handleReset} />
+      <MissionStrip />
 
-      <InputSection
-        onSubmit={handleSubmit}
-        isLoading={isLoading}
-        error={showError}
-      />
-
-      {appState === "results" && (
+      {appState === "loading" ? (
+        <LoadingScreen />
+      ) : appState === "results" ? (
         <ResultsSection
           claims={claims}
           onReset={handleReset}
           resultsRef={resultsRef}
         />
+      ) : (
+        <InputSection
+          onSubmit={handleSubmit}
+          isLoading={false}
+          error={showError}
+        />
       )}
-    </main>
+    </>
   );
 }

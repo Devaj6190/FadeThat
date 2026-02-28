@@ -1,3 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@1&family=Poppins:wght@700;800;900&family=Space+Mono:wght@400;700&family=Epilogue:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bg1: #06050f;
+  --accent: #6c47ff;
+  --accent2: #9b6dff;
+  --red: #ff4444;
+  --amber: #ffaa00;
+  --green: #00d68f;
+  --text: #f0eeff;
+  --text-soft: rgba(240, 238, 255, 0.55);
+  --text-muted: rgba(240, 238, 255, 0.3);
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg1);
+  color: var(--text);
+  font-family: "Epilogue", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated mesh gradient background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 50% at 20% 20%, rgba(108, 71, 255, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(155, 109, 255, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 60% 10%, rgba(0, 214, 143, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 70% at 10% 80%, rgba(255, 68, 68, 0.06) 0%, transparent 55%);
+}
+
+/* Subtle grid overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@keyframes dotpulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px #6c47ff;
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 3px #6c47ff;
+  }
+}
+
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+  }
+  60% {
+    width: 70%;
+  }
+  80% {
+    width: 84%;
+  }
+  100% {
+    width: 94%;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

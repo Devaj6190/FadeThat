@@ -1,37 +1,60 @@
 import type { Claim, Verdict } from "@/lib/types";
 
-const styles: Record<Verdict, { border: string; badge: string }> = {
+const verdictMap: Record<
+  Verdict,
+  { quoteBorder: string; pillCls: string; label: string; prefix: string }
+> = {
   Wrong: {
-    border: "border-l-red-400",
-    badge: "bg-red-950 text-red-400",
+    quoteBorder: "border-[#ff4444]",
+    pillCls:
+      "text-[#ff4444] border-[rgba(255,68,68,0.35)] bg-[rgba(255,68,68,0.08)]",
+    label: "⬤ False",
+    prefix: "Why it's wrong: ",
   },
   Uncertain: {
-    border: "border-l-amber-400",
-    badge: "bg-amber-950 text-amber-400",
+    quoteBorder: "border-[#ffaa00]",
+    pillCls:
+      "text-[#ffaa00] border-[rgba(255,170,0,0.35)] bg-[rgba(255,170,0,0.08)]",
+    label: "◉ Uncertain",
+    prefix: "Why it's uncertain: ",
   },
   Correct: {
-    border: "border-l-green-400",
-    badge: "bg-green-950 text-green-400",
+    quoteBorder: "border-[#00d68f]",
+    pillCls:
+      "text-[#00d68f] border-[rgba(0,214,143,0.35)] bg-[rgba(0,214,143,0.08)]",
+    label: "✓ Verified",
+    prefix: "Why it checks out: ",
   },
 };
 
-export default function ClaimCard({ claim }: { claim: Claim }) {
-  const { border, badge } = styles[claim.verdict];
+export default function ClaimCard({
+  claim,
+  index,
+}: {
+  claim: Claim;
+  index: number;
+}) {
+  const { quoteBorder, pillCls, label, prefix } = verdictMap[claim.verdict];
+
   return (
-    <div
-      className={`bg-[#1a1a1a] border border-[#2a2a2a] border-l-[3px] ${border} rounded-xl p-5`}
-    >
-      <div className="flex items-start justify-between gap-3 mb-2.5">
-        <p className="text-sm text-[#d4d4d4] italic leading-relaxed flex-1">
-          &ldquo;{claim.claim}&rdquo;
-        </p>
-        <span
-          className={`text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ${badge}`}
-        >
-          {claim.verdict}
-        </span>
+    <div className="px-6 py-5 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.03] transition-colors cursor-pointer">
+      <div className="font-space text-[9px] uppercase tracking-[0.15em] text-[rgba(240,238,255,0.3)] mb-2">
+        Claim {String(index + 1).padStart(2, "0")}
       </div>
-      <p className="text-sm text-[#888] leading-relaxed">{claim.reason}</p>
+      <p
+        className={`text-[15px] leading-[1.65] mb-2.5 text-[#f0eeff] pl-3.5 border-l-2 ${quoteBorder}`}
+      >
+        &ldquo;{claim.claim}&rdquo;
+      </p>
+      <div
+        className={`inline-flex items-center gap-[5px] px-2.5 py-[3px] rounded-[20px] border font-space text-[9px] uppercase tracking-[0.1em] mb-2 ${pillCls}`}
+      >
+        {label}
+      </div>
+      <p className="text-[13px] leading-[1.7] text-[rgba(240,238,255,0.55)]">
+        <strong className="text-[#f0eeff] font-semibold">{prefix}</strong>
+        {claim.reason}
+      </p>
     </div>
   );
 }
