@@ -92,13 +92,15 @@ export default function ResultsSection({ claims, onReset, resultsRef }: Props) {
       ref={resultsRef}
       className="relative z-[1] max-w-[1100px] mx-auto px-10 py-10 pb-20 flex flex-col gap-8"
     >
-      {/* Back button */}
-      <button
-        onClick={onReset}
-        className="self-start flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-white/[0.06] border border-white/[0.12] font-space text-[10px] uppercase tracking-[0.1em] text-[rgba(240,238,255,0.55)] hover:text-[#f0eeff] hover:bg-white/[0.09] hover:border-white/20 transition-all animate-fade-in"
-      >
-        ← New Article
-      </button>
+      {/* Top action row */}
+      <div className="flex items-center animate-fade-in">
+        <button
+          onClick={onReset}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-white/[0.06] border border-white/[0.12] font-space text-[10px] uppercase tracking-[0.1em] text-[rgba(240,238,255,0.55)] hover:text-[#f0eeff] hover:bg-white/[0.09] hover:border-white/20 transition-all"
+        >
+          ← New Article
+        </button>
+      </div>
 
       {/* Summary grid */}
       <div className="grid grid-cols-4 gap-3 max-sm:grid-cols-2 animate-fade-in">

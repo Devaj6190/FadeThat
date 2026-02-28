@@ -35,9 +35,10 @@ export default function ClaimCard({
   index: number;
 }) {
   const { quoteBorder, pillCls, label, prefix } = verdictMap[claim.verdict];
+  const src = claim.source;
 
   return (
-    <div className="px-6 py-5 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.03] transition-colors cursor-pointer">
+    <div className="px-6 py-5 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.03] transition-colors">
       <div className="font-space text-[9px] uppercase tracking-[0.15em] text-[rgba(240,238,255,0.3)] mb-2">
         Claim {String(index + 1).padStart(2, "0")}
       </div>
@@ -55,6 +56,26 @@ export default function ClaimCard({
         <strong className="text-[#f0eeff] font-semibold">{prefix}</strong>
         {claim.reason}
       </p>
+
+      {/* Source link */}
+      {src && (
+        <div className="mt-3 flex items-center gap-2">
+          {src.url ? (
+            <a
+              href={src.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-2.5 py-[3px] rounded-full bg-white/[0.05] border border-white/[0.10] font-space text-[9px] text-[rgba(240,238,255,0.45)] hover:text-[#9b6dff] hover:border-[rgba(108,71,255,0.4)] hover:bg-[rgba(108,71,255,0.08)] transition-all"
+            >
+              🔗 {src.name} ↗
+            </a>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-[3px] rounded-full bg-white/[0.04] border border-white/[0.08] font-space text-[9px] text-[rgba(240,238,255,0.3)]">
+              ○ {src.name}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
