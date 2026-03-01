@@ -21,6 +21,7 @@ Verdict definitions:
 - "Uncertain" — cannot be verified, is ambiguous, or lacks context
 - "Correct" — checks out against reliable knowledge
 When in doubt between Wrong and Uncertain, prefer Uncertain. Only mark a claim as Wrong if you are highly confident it is factually incorrect.
+Your knowledge cutoff is early 2025. If a claim refers to events, data, or developments that may have occurred after that date and you cannot verify it, mark it as "Uncertain" — never "Wrong" — and note the knowledge cutoff in your reason.
 If no factual claims are found, return an empty array: []
 If the article is very long, prioritize the most significant factual claims.
 Do not include opinions, predictions, or subjective statements as claims.
